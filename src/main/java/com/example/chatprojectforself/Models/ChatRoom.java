@@ -22,6 +22,10 @@ public class ChatRoom {
     private String roomName;
 
     @ManyToMany
-    @JoinColumn
+    @JoinTable
     private List<Account> accounts;
+
+    public ChatRoom(String roomName) {
+        this.roomName = roomName;
+    }
 }

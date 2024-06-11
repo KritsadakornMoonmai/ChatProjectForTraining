@@ -32,4 +32,11 @@ public class Message {
     @ManyToOne
     @JoinColumn
     private Account account;
+
+    public Message(String content, LocalDateTime sentTime, ChatRoom chatRoom, Account account) {
+        this.content = content;
+        this.sentTime = sentTime;
+        this.chatRoom = chatRoom;
+        this.account = account;
+    }
 }

@@ -20,5 +20,11 @@ public class Email {
     private String email;
 
     @OneToOne
+    @JoinColumn
     private Account account;
+
+    public Email(String email, Account account) {
+        this.email = email;
+        this.account = account;
+    }
 }

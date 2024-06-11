@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,8 +25,9 @@ public class Account {
     private String password;
     private LocalDateTime created;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Email email;
 
     @ManyToOne
@@ -35,6 +38,14 @@ public class Account {
     private List<Message> messageList;
 
     @ManyToMany
-    @JoinColumn
+    @JoinTable
     private List<ChatRoom> chatRooms;
+
+    public Account(String username, String password, LocalDateTime created, Email email, Person person) {
+        this.username = username;
+        this.password = password;
+        this.created = created;
+        this.email = email;
+        this.person = person;
+    }
 }
